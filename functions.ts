@@ -10,4 +10,4 @@ function addAndHandle(n1: number, n2: number, cb: CallableFunction) {
   cb(n1 + n2);
 }
 
-addAndHandle(1, 2, (result) => console.log(result));
+addAndHandle(1, 2, (result: number) => console.log(result));

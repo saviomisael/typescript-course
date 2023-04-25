@@ -1,23 +1,43 @@
-interface Greetable {
+type Admin = {
   name: string;
+  privileges: string[];
+};
 
-  greet(phrase: string): void;
-}
+type Employee = {
+  name: string;
+  startDate: Date;
+};
 
-interface IPerson extends Greetable {
-  age: number;
-}
+type ElevatedEmployee = Admin | Employee;
 
-class PersonImpl implements IPerson {
-  name!: string;
-  age!: number;
-  greet(phrase: string): void {
-    console.log(phrase + ' ' + this.name);
+const e1: ElevatedEmployee = {
+  name: 'Savio',
+  privileges: ['create-user'],
+  startDate: new Date(),
+};
+
+function printEmployeeInformation(emp: ElevatedEmployee) {
+  if ('privileges' in emp) {
+    console.log(emp.privileges);
   }
 }
 
-let user1 = new PersonImpl();
-user1.age = 23;
-user1.name = 'Savio';
+printEmployeeInformation(e1);
 
-user1.greet("Hi there - I'm");
+const userInputElement = document.querySelector(
+  '.user-input',
+)! as HTMLInputElement;
+
+userInputElement.value = 'Hi there!';
+
+interface ErrorContainer {
+  [key: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: 'Not a valid email!',
+  username: 'Must start with a capital character!',
+};
+
+const storedData = null ?? 'DEFAULT';
+console.log(storedData);

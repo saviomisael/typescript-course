@@ -1,43 +1,48 @@
-type Admin = {
-  name: string;
-  privileges: string[];
-};
+const names = ['Max', 'Manuel']
 
-type Employee = {
-  name: string;
-  startDate: Date;
-};
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign({}, objA, objB);
+}
 
-type ElevatedEmployee = Admin | Employee;
+const mergedObject = merge({name: 'Savio'}, {age: 23});
 
-const e1: ElevatedEmployee = {
-  name: 'Savio',
-  privileges: ['create-user'],
-  startDate: new Date(),
-};
+console.log(mergedObject.age, mergedObject.name);
 
-function printEmployeeInformation(emp: ElevatedEmployee) {
-  if ('privileges' in emp) {
-    console.log(emp.privileges);
+interface Lengthy {
+  length: number;
+}
+
+function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+  let description = 'Got no value.';
+
+  if(element.length > 0) {
+    description = `Got ${element.length} elements.`;
   }
+
+  return [element, description];
 }
 
-printEmployeeInformation(e1);
+console.log(countAndDescribe('Hi there!'));
 
-const userInputElement = document.querySelector(
-  '.user-input',
-)! as HTMLInputElement;
-
-userInputElement.value = 'Hi there!';
-
-interface ErrorContainer {
-  [key: string]: string;
+function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) {
+  return 'Value ' + obj[key];
 }
 
-const errorBag: ErrorContainer = {
-  email: 'Not a valid email!',
-  username: 'Must start with a capital character!',
-};
+console.log(extractAndConvert({name: 'Savio'}, 'name'));
 
-const storedData = null ?? 'DEFAULT';
-console.log(storedData);
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(title: string, description: string, date: Date): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+
+  return courseGoal as CourseGoal;
+}
+
+const namesArr: Readonly<string[]> = ['Max', 'Sports'];

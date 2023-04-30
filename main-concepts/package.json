@@ -1,0 +1,13 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Savio Moreira",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
